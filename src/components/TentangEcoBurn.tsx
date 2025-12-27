@@ -11,7 +11,9 @@ export function TentangEcoBurn() {
           </div>
           <h1 className="text-gray-900">Tentang EcoBurn</h1>
         </div>
-        <p className="text-gray-600 text-lg">Platform pengelolaan pembakaran sampah ramah lingkungan dengan teknologi tobong asap</p>
+        <p className="text-gray-600 text-lg">ECOBURN adalah sistem cerdas untuk pengelolaan dan pembakaran sampah yang dikembangkan guna mendukung program kebersihan Kelurahan Bausasran. Saat ini, tersedia 2 unit Tobong Asap, yaitu teknologi pembakar sampah minim polusi yang menjadi alternatif lebih aman dibanding pembakaran terbuka.</p>
+        {/* <br />
+        <p className="text-gray-600 text-lg">Dengan kombinasi monitoring dan prediksi, ECOBURN menjadi langkah awal menuju sistem pengelolaan sampah yang modern, efisien, transparan, dan berbasis data. Sistem ini juga dapat berkembang menjadi layanan digital bagi warga di masa mendatang.</p> */}
       </div>
 
       {/* Vision & Mission */}
@@ -44,25 +46,20 @@ export function TentangEcoBurn() {
       <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 mb-6">
         <h2 className="text-gray-900 mb-4">Apa itu EcoBurn?</h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
-          <p>
-            EcoBurn adalah sistem manajemen pembakaran sampah yang menggunakan teknologi <strong>Tobong Asap</strong>, 
-            sebuah inovasi yang dirancang khusus untuk mengurangi dampak negatif pembakaran sampah terhadap lingkungan.
+          <p>EcoBurn adalah sistem manajemen pembakaran sampah yang menggunakan teknologi <strong>Tobong Asap</strong>, sebuah inovasi yang dirancang khusus untuk mengurangi dampak negatif pembakaran sampah terhadap lingkungan.
           </p>
-          <p>
-            Teknologi Tobong Asap mampu mengurangi emisi asap dan polutan hingga 98% dibandingkan dengan metode pembakaran 
-            konvensional. Sistem ini dilengkapi dengan filter udara canggih dan kontrol suhu yang optimal untuk memastikan 
-            proses pembakaran berlangsung efisien dan aman.
+          <p>Ecoburn menghadirkan pendekatan modern dalam pengelolaan sampah dengan menggabungkan teknologi ramah lingkungan, sistem monitoring digital, dan fitur prediksi berbasis data. Dengan dukungan Tobong Asap dan dashboard analitik, kelurahan dapat mengelola operasional lebih efisien sekaligus meningkatkan kualitas lingkungan.
           </p>
-          <p>
+          {/* <p>
             Melalui platform digital yang user-friendly, EcoBurn memudahkan pengguna untuk:
-          </p>
-          <ul className="list-disc list-inside space-y-2 ml-4">
-            <li>Mendaftar dan mengelola akun anggota</li>
-            <li>Melakukan penjadwalan pembakaran sampah</li>
-            <li>Memantau status pembakaran secara real-time</li>
-            <li>Melihat riwayat dan laporan pembakaran</li>
-            <li>Mengelola keuangan dan pembayaran</li>
-          </ul>
+          </p> */}
+          {/* <ul className="list-disc list-inside space-y-2 ml-4">
+            <li>Monitoring real-time untuk aktivitas pembakaran dan penggunaan tobong.</li>
+            <li>Transparansi penuh melalui pencatatan otomatis dan pelaporan digital.</li>
+            <li>Fitur prediksi cerdas (volume sampah, optimasi jadwal, deteksi hambatan).</li>
+            <li>Dashboard analitik untuk pengambilan keputusan berbasis data.</li>
+            <li>Siap berkembang menjadi layanan publik digital untuk warga.</li>
+          </ul> */}
         </div>
       </div>
 
@@ -74,12 +71,11 @@ export function TentangEcoBurn() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
-            'Teknologi ramah lingkungan',
-            'Pengurangan emisi 98%',
-            'Sistem manajemen terintegrasi',
-            'Laporan real-time',
-            'Biaya terjangkau',
-            'Dukungan pelanggan 24/7'
+            'Monitoring real-time untuk aktivitas pembakaran dan penggunaan tobong.',
+            'Transparansi penuh melalui pencatatan otomatis dan pelaporan digital.',
+            'Fitur prediksi cerdas (volume sampah, optimasi jadwal, deteksi hambatan)',
+            'Dashboard analitik untuk pengambilan keputusan berbasis data.',
+            'Siap berkembang menjadi layanan publik digital untuk warga.',
           ].map((feature, index) => (
             <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
               <p className="text-white">✓ {feature}</p>
