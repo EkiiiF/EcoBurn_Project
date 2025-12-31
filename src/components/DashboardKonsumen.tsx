@@ -1,11 +1,51 @@
+import React, { useState, useEffect } from 'react';
 import { Leaf, Flame, Users, TrendingUp, Recycle, Wind, Droplets } from 'lucide-react';
+import axios from 'axios';
 
 export function DashboardKonsumen() {
+  const [loading, setLoading] = useState(true);
+  
+  // Default values
+  const [statsData, setStatsData] = useState({
+    totalSampah: '0 Kg',
+    penggunaAktif: '0',
+    tobongAktif: '0',
+    penguranganEmisi: '98%'
+  });
+
+  // --- FETCH DATA PUBLIK (TANPA LOGIN) ---
+  useEffect(() => {
+    const fetchPublicStats = async () => {
+      try {
+        // Panggil endpoint publik yang baru kita buat
+        // Tidak perlu header Authorization/Token
+        const response = await axios.get('http://127.0.0.1:8000/api/public/stats');
+
+        if (response.data.status === 'success') {
+            const data = response.data.data;
+            setStatsData({
+                totalSampah: data.total_sampah,
+                penggunaAktif: data.pengguna_aktif,
+                tobongAktif: data.tobong_aktif,
+                penguranganEmisi: data.pengurangan_emisi
+            });
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data publik:", error);
+        // Jika error, data tetap menggunakan default '0' agar tampilan tidak rusak
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPublicStats();
+  }, []);
+
   const stats = [
-    { label: 'Total Sampah Dibakar', value: '12,450 Kg', icon: Flame, color: 'bg-orange-100 text-orange-600' },
-    { label: 'Pengguna Aktif', value: '324', icon: Users, color: 'bg-blue-100 text-blue-600' },
-    { label: 'Tobong Aktif', value: '8', icon: Wind, color: 'bg-green-100 text-green-600' },
-    { label: 'Pengurangan Emisi', value: '98%', icon: TrendingUp, color: 'bg-purple-100 text-purple-600' },
+    { label: 'Total Sampah Dibakar', value: statsData.totalSampah, icon: Flame, color: 'bg-orange-100 text-orange-600' },
+    { label: 'Pengguna Aktif', value: statsData.penggunaAktif, icon: Users, color: 'bg-blue-100 text-blue-600' },
+    { label: 'Tobong Aktif', value: statsData.tobongAktif, icon: Wind, color: 'bg-green-100 text-green-600' },
+    { label: 'Pengurangan Emisi', value: statsData.penguranganEmisi, icon: TrendingUp, color: 'bg-purple-100 text-purple-600' },
   ];
 
   const benefits = [
@@ -40,19 +80,19 @@ export function DashboardKonsumen() {
             <Leaf className="w-8 h-8" />
             <span className="text-white/90">Selamat Datang di</span>
           </div>
-          <h1 className="text-white mb-4">EcoBurn</h1>
+          <h1 className="text-white mb-4 text-3xl font-bold">EcoBurn</h1>
           <p className="text-white/90 text-lg mb-6">
             Platform Pengelolaan Pembakaran Sampah Ramah Lingkungan dengan Teknologi Tobong Asap
           </p>
           <div className="flex flex-wrap gap-3">
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-              <span className="text-white">✓ Mengurangi Polusi</span>
+              <span className="text-white font-medium">✓ Mengurangi Polusi</span>
             </div>
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-              <span className="text-white">✓ Hemat Biaya</span>
+              <span className="text-white font-medium">✓ Hemat Biaya</span>
             </div>
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-              <span className="text-white">✓ Mudah Digunakan</span>
+              <span className="text-white font-medium">✓ Mudah Digunakan</span>
             </div>
           </div>
         </div>
@@ -68,7 +108,11 @@ export function DashboardKonsumen() {
                 <Icon className="w-6 h-6" strokeWidth={1.5} />
               </div>
               <div className="text-gray-500 text-sm mb-1">{stat.label}</div>
-              <div className="text-gray-900">{stat.value}</div>
+              {loading ? (
+                 <div className="h-7 w-24 bg-gray-200 animate-pulse rounded"></div>
+              ) : (
+                 <div className="text-gray-900 font-bold text-xl">{stat.value}</div>
+              )}
             </div>
           );
         })}
@@ -77,7 +121,7 @@ export function DashboardKonsumen() {
       {/* Edukasi Section */}
       <div className="mb-8">
         <div className="mb-6">
-          <h2 className="text-gray-900 mb-2">Mengapa EcoBurn?</h2>
+          <h2 className="text-gray-900 mb-2 font-bold text-xl">Mengapa EcoBurn?</h2>
           <p className="text-gray-600">Solusi pembakaran sampah yang aman, bersih, dan bertanggung jawab</p>
         </div>
 
@@ -85,13 +129,13 @@ export function DashboardKonsumen() {
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:border-[#4C9876] transition-colors">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:border-[#4C9876] transition-colors group">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-[#4C9876]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-6 h-6 text-[#4C9876]" strokeWidth={1.5} />
+                  <div className="w-12 h-12 bg-[#4C9876]/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#4C9876] transition-colors">
+                    <Icon className="w-6 h-6 text-[#4C9876] group-hover:text-white transition-colors" strokeWidth={1.5} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-gray-900 mb-2">{benefit.title}</h3>
+                    <h3 className="text-gray-900 mb-2 font-semibold">{benefit.title}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 </div>
@@ -103,7 +147,7 @@ export function DashboardKonsumen() {
 
       {/* Info Section */}
       <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100">
-        <h2 className="text-gray-900 mb-4">Tentang Sistem EcoBurn</h2>
+        <h2 className="text-gray-900 mb-4 font-bold text-xl">Tentang Sistem EcoBurn</h2>
         <div className="space-y-4 text-gray-600 leading-relaxed">
           <p>
             EcoBurn adalah platform inovatif yang mengelola pembakaran sampah menggunakan teknologi <strong>Tobong Asap</strong> - 
@@ -112,7 +156,7 @@ export function DashboardKonsumen() {
           <p>
             Dengan EcoBurn, masyarakat dapat mengelola sampah dengan cara yang:
           </p>
-          <ul className="list-disc list-inside space-y-2 ml-4">
+          <ul className="list-disc list-inside space-y-2 ml-4 marker:text-[#4C9876]">
             <li>Ramah lingkungan dengan emisi minimal</li>
             <li>Efisien dalam mengurangi volume sampah</li>
             <li>Menghasilkan abu yang dapat dimanfaatkan sebagai pupuk</li>
