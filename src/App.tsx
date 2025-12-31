@@ -12,6 +12,7 @@ import { LaporanPembakaran } from './components/LaporanPembakaran';
 import { ProfilAdmin } from './components/ProfilAdmin';
 import { TentangEcoBurn } from './components/TentangEcoBurn';
 import { LoginPage } from './components/LoginPage';
+// import { RegisterPage } from './components/RegisterPage';
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -94,7 +95,14 @@ export default function App() {
         case 'tentang':
           return <TentangEcoBurn />;
         case 'login':
-          return <LoginPage onLoginSuccess={handleLoginSuccess} />;
+          return (
+            <LoginPage
+              onLoginSuccess={handleLoginSuccess}
+              // onNavigate={navigateTo}
+            />  
+          );
+        // case 'register':
+        //   return <RegisterPage onNavigate={navigateTo} />;
         default:
           return <DashboardKonsumen />;
       }

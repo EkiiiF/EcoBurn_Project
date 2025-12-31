@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Lock, User, LogIn, Eye, EyeOff, Loader2 } from 'lucide-react';
 import ecoBurnLogo from '../assets/EcoBurn_Logo.png';
+// import { Link } from 'react-router-dom';
 // Import client HTTP
 import axios from 'axios'; 
 // Asumsi API Anda berjalan di http://localhost:8000/api
@@ -10,11 +11,13 @@ const API_URL = 'http://localhost:8000/api';
 // Hapus interface, kita akan memanggil fungsi login di sini, bukan di App.tsx
 // interface LoginPageProps { onLogin: (username: string, password: string) => boolean; }
 
-// Ubah prop component, asumsikan kita akan menerima fungsi penanganan sukses dari App
+// Ubah prop component, asumsikan kita akan menerima fungsi penanganan sukses dari App.tsx
 interface LoginPageProps {
-  onLoginSuccess: () => void; 
+  onLoginSuccess: () => void;
+  // onNavigate: (page: string) => void;
 }
 
+// export function LoginPage({ onLoginSuccess,  onNavigate}: LoginPageProps) {
 export function LoginPage({ onLoginSuccess }: LoginPageProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -146,6 +149,23 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
             </button>
           </form>
           {/* ... (Demo Credentials) ... */}
+          {/* <div className="mt-6 text-center"> */}
+            {/* <p className="text-gray-600">
+              Don't have an account?{' '}
+              <Link to="/register" className="text-[#3BAA5C] hover:underline">
+                Register here
+              </Link>
+            </p> */}
+            {/* <p className="text-gray-600">
+              Don't have an account?{' '}
+              <span
+                onClick={() => onNavigate('register')}
+                className="text-[#3BAA5C] hover:underline cursor-pointer"
+              >
+                Register here
+              </span>
+            </p>
+          </div> */}
         </div>
       </div>
     </div>
